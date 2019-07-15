@@ -249,6 +249,7 @@ namespace LumexLDM6432 {
     //% blockId="LDM_playPage1" block="display single page(0~6) stored in the LDM without animation: %myPage"
     //% weight=80 blockGap=10 blockInlineInputs=true myPage.min=0 myPage.max=6
     export function LDM_playPage1(myPage: number): void {
+        LDM_stopPages()
         serial.writeString("ATfc=(" + myPage + ")")
         serial.readUntil("E")
         basic.pause(20)
@@ -257,6 +258,7 @@ namespace LumexLDM6432 {
     //% blockId="LDM_playPage2" block="display single page(0~6) stored in the LDM: %myPage|animation %effect|speed(1~10) %speed"
     //% weight=78 blockGap=10 blockInlineInputs=true myPage.min=0 myPage.max=6 effect.min=1 effect.max=15 speed.min=1 speed.max=10
     export function LDM_playPage2(myPage: number, effect: animationType, speed: number): void {
+        LDM_off()
         //清掉特效
         serial.writeString("ATfd=(0)")
         serial.readUntil("E")
@@ -268,6 +270,7 @@ namespace LumexLDM6432 {
         serial.writeString("ATfc=(" + myPage + ")")
         serial.readUntil("E")
         basic.pause(20)
+        LDM_on()
         serial.writeString("ATfd=(" + effect + ")")
         serial.readUntil("E")
         basic.pause(20)
@@ -277,6 +280,7 @@ namespace LumexLDM6432 {
     //% weight=76 blockGap=10 blockInlineInputs=true pages.min=2 pages.max=7 effect.min=16 effect.max=30 period.min=1 period.max=10 speed.min=1 speed.max=10
     export function LDM_playPages(pages: number, period: number, effect: animationType, speed: number): void {
         //清掉特效
+        LDM_off()
         serial.writeString("ATfd=(0)")
         serial.readUntil("E")
         basic.pause(20)
@@ -289,6 +293,7 @@ namespace LumexLDM6432 {
         serial.writeString("ATbf=(" + speed + ")")
         serial.readUntil("E")
         basic.pause(20)
+        LDM_on()
         if (effect > 1 && effect < 7)
             effect += 14
         else if (effect > 6 && effect < 16)
