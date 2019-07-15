@@ -249,7 +249,6 @@ namespace LumexLDM6432 {
     //% blockId="LDM_playPage1" block="display single page(0~6) stored in the LDM without animation: %myPage"
     //% weight=80 blockGap=10 blockInlineInputs=true myPage.min=0 myPage.max=6
     export function LDM_playPage1(myPage: number): void {
-        LDM_stopPages()
         serial.writeString("ATfc=(" + myPage + ")")
         serial.readUntil("E")
         basic.pause(20)
