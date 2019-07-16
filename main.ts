@@ -174,8 +174,8 @@ namespace LumexLDM6432 {
      * @param pinRX to pinRX ,eg: SerialPin.P1
      * @param pinTX to pinTX ,eg: SerialPin.P2
     */
-    //% blockId="LDM_setSerial" block="set LDM RX to %pinRX|TX to %pinTX"
-    //% weight=100 blockGap=10 blockInlineInputs=true 
+    //% blockId="LDM_setSerial" block="set LDM RX(white wire) to %pinRX| TX(yellow wire) to %pinTX"
+    //% weight=100 blockGap=10 blockInlineInputs=true
     export function LDM_setSerial(pinRX: SerialPin, pinTX: SerialPin): void {
         basic.pause(300)
         serial.redirect(
@@ -257,20 +257,24 @@ namespace LumexLDM6432 {
     //% blockId="LDM_playPage2" block="display single page(0~6) stored in the LDM: %myPage|animation %effect|speed(1~10) %speed"
     //% weight=78 blockGap=10 blockInlineInputs=true myPage.min=0 myPage.max=6 effect.min=1 effect.max=15 speed.min=1 speed.max=10
     export function LDM_playPage2(myPage: number, effect: animationType, speed: number): void {
-        LDM_off()
+        serial.writeString("ATf2=(0)")
+        serial.readUntil("E")
+        basic.pause(20)
         //清掉特效
         serial.writeString("ATfd=(0)")
         serial.readUntil("E")
-        basic.pause(20)
+        basic.pause(3)
         //設定速度及特效
         serial.writeString("ATbf=(" + speed + ")")
         serial.readUntil("E")
-        basic.pause(20)
+        basic.pause(3)
         serial.writeString("ATfc=(" + myPage + ")")
         serial.readUntil("E")
-        basic.pause(20)
-        LDM_on()
+        basic.pause(3)
         serial.writeString("ATfd=(" + effect + ")")
+        serial.readUntil("E")
+        basic.pause(20)
+        serial.writeString("ATf2=(11)")
         serial.readUntil("E")
         basic.pause(20)
     }
@@ -279,25 +283,29 @@ namespace LumexLDM6432 {
     //% weight=76 blockGap=10 blockInlineInputs=true pages.min=2 pages.max=7 effect.min=16 effect.max=30 period.min=1 period.max=10 speed.min=1 speed.max=10
     export function LDM_playPages(pages: number, period: number, effect: animationType, speed: number): void {
         //清掉特效
-        LDM_off()
+        serial.writeString("ATf2=(0)")
+        serial.readUntil("E")
+        basic.pause(20)
         serial.writeString("ATfd=(0)")
         serial.readUntil("E")
-        basic.pause(20)
+        basic.pause(3)
         serial.writeString("ATdf=(" + pages + ")")
         serial.readUntil("E")
-        basic.pause(20)
+        basic.pause(3)
         serial.writeString("ATbe=(" + period + ")")
         serial.readUntil("E")
-        basic.pause(20)
+        basic.pause(3)
         serial.writeString("ATbf=(" + speed + ")")
         serial.readUntil("E")
-        basic.pause(20)
-        LDM_on()
+        basic.pause(3)
         if (effect > 1 && effect < 7)
             effect += 14
         else if (effect > 6 && effect < 16)
             effect += 15
         serial.writeString("ATfd=(" + effect + ")")
+        serial.readUntil("E")
+        basic.pause(20)
+        serial.writeString("ATf2=(11)")
         serial.readUntil("E")
         basic.pause(20)
     }
