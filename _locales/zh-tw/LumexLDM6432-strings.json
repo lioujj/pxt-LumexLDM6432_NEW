@@ -39,7 +39,7 @@
     "LumexLDM6432.animationType.type12|block":"由左下飛入",
     "LumexLDM6432.animationType.type13|block":"由右下飛入",
     "LumexLDM6432.animationType.type14|block":"由各方向飛入",
-    "LumexLDM6432.LDM_setSerial|block":"設定LDM的RX連接到 %pinRX|TX連接到 %pinTX", 
+    "LumexLDM6432.LDM_setSerial|block":"設定LDM的RX(白線)連接到 %pinRX| TX(黃線)連接到 %pinTX", 
     "LumexLDM6432.LDM_getColor|block":"顏色編碼 %myColor", 
     "LumexLDM6432.LDM_clear|block":"LDM清除畫面",
     "LumexLDM6432.LDM_putString|block":"顯示字串 %myStr|文字像素大小 %mySize|出現在哪一行(0~3) %line|哪一列(0~10) %column|顏色編碼(0~111): %color",
