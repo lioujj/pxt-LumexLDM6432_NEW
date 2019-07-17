@@ -263,14 +263,14 @@ namespace LumexLDM6432 {
         //清掉特效
         serial.writeString("ATfd=(0)")
         serial.readUntil("E")
-        basic.pause(3)
+        basic.pause(20)
         //設定速度及特效
         serial.writeString("ATbf=(" + speed + ")")
         serial.readUntil("E")
-        basic.pause(3)
+        basic.pause(20)
         serial.writeString("ATfc=(" + myPage + ")")
         serial.readUntil("E")
-        basic.pause(3)
+        basic.pause(20)
         serial.writeString("ATfd=(" + effect + ")")
         serial.readUntil("E")
         basic.pause(20)
@@ -288,16 +288,16 @@ namespace LumexLDM6432 {
         basic.pause(20)
         serial.writeString("ATfd=(0)")
         serial.readUntil("E")
-        basic.pause(3)
+        basic.pause(20)
         serial.writeString("ATdf=(" + pages + ")")
         serial.readUntil("E")
-        basic.pause(3)
+        basic.pause(20)
         serial.writeString("ATbe=(" + period + ")")
         serial.readUntil("E")
-        basic.pause(3)
+        basic.pause(20)
         serial.writeString("ATbf=(" + speed + ")")
         serial.readUntil("E")
-        basic.pause(3)
+        basic.pause(20)
         if (effect > 1 && effect < 7)
             effect += 14
         else if (effect > 6 && effect < 16)
@@ -439,7 +439,7 @@ namespace LumexLDM6432 {
     export function LDM_setPixel(x0: number, y0: number, color: number): void {
         serial.writeString("ATef=(" + color + ")")
         serial.readUntil("E")
-        basic.pause(3)
+        basic.pause(20)
         serial.writeString("AT9e=(" + x0 + "," + y0 + ")")
         serial.readUntil("E")
         basic.pause(20)
@@ -515,7 +515,7 @@ namespace LumexLDM6432 {
     export function LDM_movePattern(myDir :moveDirection,myPattern: usrPatternType, myID: number): void {
         serial.writeString("AT"+myDir+"=(" +myPattern + "," + myPattern + "," + myID + ")")
         serial.readUntil("E")
-        basic.pause(3)
+        basic.pause(20)
     }
 
     //% blockId="LDM_showAll" block="Display the multi patterns in the same time"
