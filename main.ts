@@ -183,8 +183,8 @@ namespace LumexLDM6432 {
             pinTX,
             BaudRate.BaudRate115200
         )
-        serial.readUntil("E")
-        basic.pause(20)
+        //serial.readUntil("E")
+        basic.pause(200)
         LDM_stopPages()
         LDM_setPatternOverlay(1)
     }
